@@ -1,0 +1,9 @@
+<% @comments.each do |comment|%>
+	<div class="post_wrapper">
+		<h2 class="title"><%= link_to comment.name,root_path %>
+		</h2>
+		<p class="date">
+			comment.body
+		</p>
+	</div>
+<% end %>

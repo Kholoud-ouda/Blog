@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project</title>
+    <%= csrf_meta_tags %>
+
+    <<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	 <div id="sidebar">
+  	<div id="logo">
+  		<%= link_to root_path do %>
+  		<%= image_tag "logo.jpg" %>
+  		<% end %>
+  	</div>
+  	<div>
+  		<ul>
+  			<li class="cat">Website</li>
+  			<li> <%= link_to "Blog", root_path %></li>
+  			<li> <%= link_to "About",about_path %></li>
+  		</ul>
+  		<ul>
+  			<li class="cat">Social</li>
+  			<li><a href="https://www.twitter.com">Twitter</a></li>
+  			<li><a href="https://www.facebook.com">Faceook</a></li>
+  			<li><a href="https://www.yahoo.com">Yahoo</a></li>
+  			<li><a href="https://www.gmail.com">Gamail</a></li>
+  		</ul>
+  		<p class="copy">&copy; March 11 2018 Khloud Ouda</p>
+  	</div>
+  	
+  </div>
+  <div id="main_content">
+  	<div id="header">
+        <% if current_page?(root_path) %>
+						<p><%= link_to 'All Posts',posts_path %></p>
+        <% elsif current_page?(about_path) %>
+            <p>About</p>
+        <% else %>
+         <p> <%= link_to 'Back To All Posts', root_path %></p> 
+          <% end %>
+          <div class="buttons">
+          <% if user_signed_in? %>
+      					<p class="button">
+      						<%= link_to 'New Post',new_post_path %>
+      					</p>
+      					<p class="button"><%= link_to 'Log Out', destroy_user_session_path,method: :delete%></p></p>
+            <% else %>
+                <p class="button"><%= link_to 'Log In', user_session_path %></p>
+            <% end %>
+      		</div>
+    
+  	</div>
+  	<% flash.each do |name, msg| %>
+			<%= content_tag(:div, msg, class: "alert") %>
+	<% end %>
+    <%= yield %>
+  </div>
+  
+  </body>
+</html>
